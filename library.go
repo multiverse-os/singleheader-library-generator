@@ -11,6 +11,15 @@ import (
 // TODO: Will eventually need to pull in all non-standard libraries to ensure we
 // create single headers that are actually single headers, we should merge in
 // dependencies that are non-standard libraries if necessary.
+
+// NOTE
+// After reviewing other methods of generating these single-header file
+// libraries, we decided to use existing conventions and terminology.
+//
+// We wanted to provide the intro/outro so that anyone peaking into the header
+// could quickly learn about it without needing to sift through the logic to
+// figure out what it is. With a few simple additions, we can save people
+// confusion and head-aches in the future.
 type Dependency struct {
 	Name            string
 	StandardLibrary bool
@@ -19,7 +28,8 @@ type Dependency struct {
 type Library struct {
 	Name          string
 	Description   string
-	About         string
+	Readme        string
+	License       string
 	Lanuage       Language
 	Path          string
 	Files         []*File
@@ -39,7 +49,7 @@ type Content struct {
 // NOTE:
 // About is dependent on if it is included in the configuration file, wheras the
 // usage section is generated.
-func (self Library) Introduction() (output string) {
+func (self Library) Intro() (output string) {
 	output += "/*\n"
 	output += "\n"
 	output += strings.ToLower(self.Name) + ".h - Single Header (or Header Only) Library \n"
@@ -56,16 +66,31 @@ func (self Library) Introduction() (output string) {
 	output += "    " + "and the entire library is encapsulated in a namespace to further simplify"
 	output += "    " + "using the library, and avoiding potential namespace pollution issues."
 	output += "\n"
+	// TODO: Iterate through the README and add it here in the same format as
+	// above
 	output += "*/"
 	return output
 }
 
+// NOTE
+// The outro tyically is used for putting the license information about the
+// library.
+func (self Library) Outro() string {
+	// TODO: Iterate through the LICENSE and add it here in the same format as
+	// above
+}
+
+// To provide breaking up of sections like in:
+// https://github.com/ApoorvaJ/nuklear/blob/master/demo/sdl_opengl3/nuklear_sdl_gl3.h
+// for breaking up the API, IMPLEMENTATION.
 func (self Library) Banner(title string) (output string) {
-	output += "/* ***********************************************************\n"
-	output += "\n"
-	output += "                       " + title + "\n"
-	output += "\n"
-	output += "*********************************************************** */\n"
+	output += "/* \n"
+	output += " * ============================================================== \n"
+	output += " * \n"
+	output += " *                              " + title + "\n"
+	output += " * \n"
+	output += " * ============================================================== \n"
+	output += " */"
 	return output
 }
 

@@ -26,3 +26,25 @@ binaries, and so we will include easy set of instructions for compiling the
 binary and generating YAML configurations for a few libraries to illustrate the
 entire process which should be simple and ideally a few steps. 
 
+
+#### Existing Options 
+Multiverse developers tried other methods before deciding to implement this
+project, others might find these solutions work better for their purposes. These
+projects were used as reference for this project, in the sense that we tried to
+use existing terminology, and where it made sense, keep the same structure of
+inserting the `README`, and `LICENSE` files for example. 
+
+  * [conan: how to package header-only libraries](https://docs.conan.io/en/latest/howtos/header_only.html)
+    "packaging a header only library, without requiring to build and run unit
+    tests for it within Conan, can be done with very simple recipe."...
+
+  * [Creating a header only library with cmake](http://mariobadr.com/creating-a-header-only-library-with-cmake.html)
+    "It seems like header-only libraries are all the rage in C++ these days. In this post, we'll see a useful way to organize your header only library and generate a CMake target that others can "link" to."...
+
+  * [Single-Header Packer](https://apoorvaj.io/single-header-packer.html) 
+    "End-users often like single header C/C++ libraries because they require
+    very little work to integrate into their projects. However, a single file
+    can be difficult to read and maintain. This is a web-based tool to get the
+    best of both worlds."...
+
+  * [And the underlying python script of the above option](https://github.com/ApoorvaJ/libs/blob/master/scripts/single_header_packer.py)
